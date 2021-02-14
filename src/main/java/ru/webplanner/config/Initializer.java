@@ -1,4 +1,4 @@
-package ru.koneva.webchat.config;
+package ru.webplanner.config;
 
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;

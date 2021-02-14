@@ -1,4 +1,4 @@
-package ru.koneva.webchat.config;
+package ru.webplanner.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -17,7 +17,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan("ru.koneva.webchat")
+@ComponentScan("ru.webplanner")
 @EnableWebMvc
 public class ConfigClass implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
