@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.webplanner.dao.PersonDAO;
 
 @Controller
-@SessionAttributes("person")
 public class PeopleController {
 
     PersonDAO personDAO;

@@ -26,4 +26,9 @@ public class JdbcTemplatePersonDAO implements PersonDAO {
                 new BeanPropertyRowMapper<>(Person.class))
                 .stream().findAny().orElse(null);
     }
+
+    @Override
+    public boolean contains(Person person) {
+        return show(person.getUserName()) != null;
+    }
 }

@@ -7,26 +7,28 @@ import org.springframework.web.bind.annotation.*;
 import ru.webplanner.dao.SectionDAO;
 import ru.webplanner.models.Person;
 import ru.webplanner.models.Section;
+import ru.webplanner.models.SessionFacade;
 
 import java.util.List;
 
 @Controller
-@SessionAttributes("person")
 @RequestMapping("/sections")
 public class SectionsController {
 
     private final SectionDAO sectionDAO;
-    private final Person person;
+    private final SessionFacade sessionFacade;
 
     @Autowired
-    public SectionsController(@ModelAttribute("person") Person person, SectionDAO sectionDAO) {
+    public SectionsController(SessionFacade sessionFacade, SectionDAO sectionDAO) {
         this.sectionDAO = sectionDAO;
-        this.person = person;
+        this.sessionFacade = sessionFacade;
     }
 
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("sections", sectionDAO.index(person.getId()));
+        Person person = sessionFacade.getPerson();
+        List<Section> sections = sectionDAO.index(person.getId());
+        model.addAttribute("sections", sections);
         return "sections/index";
     }
 }
