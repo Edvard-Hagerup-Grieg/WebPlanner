@@ -5,5 +5,10 @@ import ru.webplanner.models.Section;
 import java.util.List;
 
 public interface SectionDAO {
-    List<Section> index(int personId);
+
+    List<Section> index();
+    Section show(int id);
+    void save(Section section);
+    void update(int id, Section section);
+    void delete(int id);
 }
