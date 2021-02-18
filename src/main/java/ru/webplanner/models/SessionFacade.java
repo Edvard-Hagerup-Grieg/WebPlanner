@@ -6,18 +6,18 @@ import org.springframework.stereotype.Component;
 public class SessionFacade {
 
     private boolean loggedIn;
-    private Person person;
+    private Account account;
 
     public SessionFacade() {
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setAccount(Account account) {
+        this.account = account;
         this.loggedIn = true;
     }
 
-    public Person getPerson() {
-        return person;
+    public Account getAccount() {
+        return account;
     }
 
     public boolean isLoggedIn() {

@@ -4,31 +4,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import ru.webplanner.models.Person;
+import ru.webplanner.models.Account;
 
 import java.sql.Types;
 
 @Component
-public class JdbcTemplatePersonDAO implements PersonDAO {
+public class JdbcTemplateAccountDAO implements AccountDAO {
 
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public JdbcTemplatePersonDAO(JdbcTemplate jdbcTemplate) {
+    public JdbcTemplateAccountDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public Person show(String userName) {
-        return jdbcTemplate.query("SELECT * FROM Person WHERE userName=?",
+    public Account show(String userName) {
+        return jdbcTemplate.query("SELECT * FROM Account WHERE userName=?",
                 new Object[] {userName},
                 new int[] {Types.VARCHAR},
-                new BeanPropertyRowMapper<>(Person.class))
+                new BeanPropertyRowMapper<>(Account.class))
                 .stream().findAny().orElse(null);
     }
 
     @Override
-    public boolean contains(Person person) {
-        return show(person.getUserName()) != null;
+    public boolean contains(Account account) {
+        return show(account.getUserName()) != null;
     }
 }

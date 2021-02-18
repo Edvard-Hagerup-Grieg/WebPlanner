@@ -2,7 +2,7 @@ package ru.webplanner.models;
 
 public class Section {
     int id;
-    int personId;
+    int accountId;
     String name;
 
     public int getId() {
@@ -13,12 +13,12 @@ public class Section {
         this.id = id;
     }
 
-    public int getPersonId() {
-        return personId;
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setPersonId(int personId) {
-        this.personId = personId;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
     public String getName() {

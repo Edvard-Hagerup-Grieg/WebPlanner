@@ -8,7 +8,7 @@
 
 <p th:text="${section.getName()}">NAME</p>
 <p th:text="${section.getId()}">ID</p>
-<p th:text="${section.getPersonId()}">PERSON_ID</p>
+<p th:text="${section.getAccountId()}">PERSON_ID</p>
 
 
 <form th:action="@{/sections/{id}/edit (id=${section.getId()})}" th:object="${section}">

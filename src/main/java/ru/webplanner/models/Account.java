@@ -3,16 +3,16 @@ package ru.webplanner.models;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Person {
+public class Account {
 
     private String userName;
     private String password;
     private int id;
 
-    public Person() {
+    public Account() {
     }
 
-    public Person(String userName, String password, int id) {
+    public Account(String userName, String password, int id) {
         this.userName = userName;
         this.password = password;
         this.id = id;

@@ -24,18 +24,18 @@ public class JdbcTemplateSectionDAO implements SectionDAO {
 
     @Override
     public List<Section> index() {
-        int personId = sessionFacade.getPerson().getId();
-        return jdbcTemplate.query("SELECT * FROM Section WHERE personId=?",
-                new Object[] {personId},
+        int accountId = sessionFacade.getAccount().getId();
+        return jdbcTemplate.query("SELECT * FROM Section WHERE accountId=?",
+                new Object[] {accountId},
                 new int[] {Types.INTEGER},
                 new BeanPropertyRowMapper<>(Section.class));
     }
 
     @Override
     public Section show(int id) {
-        int personId = sessionFacade.getPerson().getId();
-        return jdbcTemplate.query("SELECT * FROM Section WHERE id=? AND personId=?",
-                new Object[] {id, personId},
+        int accountId = sessionFacade.getAccount().getId();
+        return jdbcTemplate.query("SELECT * FROM Section WHERE id=? AND accountId=?",
+                new Object[] {id, accountId},
                 new int[] {Types.INTEGER, Types.INTEGER},
                 new BeanPropertyRowMapper<>(Section.class))
                 .stream().findFirst().orElse(null);
@@ -43,22 +43,22 @@ public class JdbcTemplateSectionDAO implements SectionDAO {
 
     @Override
     public void save(Section section) {
-        int personId = sessionFacade.getPerson().getId();
+        int accountId = sessionFacade.getAccount().getId();
         jdbcTemplate.update("INSERT INTO Section VALUES (default,?,?)",
-                personId, section.getName());
+                accountId, section.getName());
     }
 
     @Override
     public void update(int id, Section section) {
-        int personId = sessionFacade.getPerson().getId();
-        jdbcTemplate.update("UPDATE Section SET name=? WHERE id=? AND personId=?",
-                section.getName(), id, personId);
+        int accountId = sessionFacade.getAccount().getId();
+        jdbcTemplate.update("UPDATE Section SET name=? WHERE id=? AND accountId=?",
+                section.getName(), id, accountId);
     }
 
     @Override
     public void delete(int id) {
-        int personId = sessionFacade.getPerson().getId();
-        jdbcTemplate.update("DELETE FROM Section WHERE id=? AND personId=?",
-                id, personId);
+        int accountId = sessionFacade.getAccount().getId();
+        jdbcTemplate.update("DELETE FROM Section WHERE id=? AND accountId=?",
+                id, accountId);
     }
 }
