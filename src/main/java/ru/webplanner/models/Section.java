@@ -1,5 +1,7 @@
 package ru.webplanner.models;
 
+import ru.webplanner.models.modules.Module;
+
 import java.util.List;
 
 public class Section {
