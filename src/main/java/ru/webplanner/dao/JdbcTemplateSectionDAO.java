@@ -58,6 +58,12 @@ public class JdbcTemplateSectionDAO implements SectionDAO {
     }
 
     @Override
+    public void delete() {
+        jdbcTemplate.update("DELETE FROM Section WHERE ownerAccount=?",
+                getOwner());
+    }
+
+    @Override
     public String getOwner() {
         return sessionFacade.getAccount().getUserName();
     }

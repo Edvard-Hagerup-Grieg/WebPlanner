@@ -7,15 +7,13 @@ public class Account {
 
     private String userName;
     private String password;
-    private int id;
 
     public Account() {
     }
 
-    public Account(String userName, String password, int id) {
+    public Account(String userName, String password) {
         this.userName = userName;
         this.password = password;
-        this.id = id;
     }
 
     public String getUserName() {
@@ -32,13 +30,5 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

@@ -59,6 +59,7 @@ public class AccountController {
     public String deleteAccount(@PathVariable("userName") String userName,
                                 Model model) {
         accountDAO.delete(userName);
+        sectionDAO.delete();
         return "redirect:/login";
     }
 }

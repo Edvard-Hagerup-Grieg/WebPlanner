@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sections</title>
+</head>
+<body>
+
+<div th:fragment="index (sections, userName)">
+
+    <br/><br/><br/>
+    <div th:each="section : ${sections}">
+        <a th:href="@{/{userName} (userName=${userName}, tab=${section.getId()})}"
+           th:text="${section.getName()}">
+            SECTION
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -11,6 +11,8 @@ public interface SectionDAO {
     void save(Section section);
     void update(int id, Section section);
     void delete(int id);
+    void delete();
 
     String getOwner();
+
 }
