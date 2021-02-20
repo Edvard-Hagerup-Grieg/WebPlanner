@@ -32,7 +32,7 @@ public class LoginController {
     public String validateAccount(@ModelAttribute("account") Account account) {
         if(accountDAO.contains(account)) {
             sessionFacade.setAccount(accountDAO.show(account.getUserName()));
-            return "redirect:/sections";
+            return "redirect:" + account.getUserName();
         }
         return "login/error";
     }

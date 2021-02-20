@@ -33,9 +33,15 @@ public class JdbcTemplateAccountDAO implements AccountDAO {
     }
 
     @Override
-    public void add(Account account) {
-        jdbcTemplate.update("INSERT INTO Account VALUES (default,?,?)",
+    public void save(Account account) {
+        jdbcTemplate.update("INSERT INTO Account VALUES (?,?)",
                 account.getUserName(), "password");
+    }
+
+    @Override
+    public void update(String userName, Account account) {
+        jdbcTemplate.update("UPDATE Account SET password=? WHERE userName=?",
+                account.getPassword(), userName);
     }
 
     @Override

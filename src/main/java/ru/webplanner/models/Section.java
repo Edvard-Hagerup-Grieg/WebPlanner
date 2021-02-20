@@ -1,9 +1,12 @@
 package ru.webplanner.models;
 
+import java.util.List;
+
 public class Section {
     int id;
-    int accountId;
+    String ownerAccount;
     String name;
+    List<Module> modules;
 
     public int getId() {
         return id;
@@ -13,12 +16,12 @@ public class Section {
         this.id = id;
     }
 
-    public int getAccountId() {
-        return accountId;
+    public String getOwnerAccount() {
+        return ownerAccount;
     }
 
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
+    public void setOwnerAccount(String ownerAccount) {
+        this.ownerAccount = ownerAccount;
     }
 
     public String getName() {
@@ -27,5 +30,13 @@ public class Section {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Module> getModules() {
+        return modules;
+    }
+
+    public void setModules(List<Module> modules) {
+        this.modules = modules;
     }
 }

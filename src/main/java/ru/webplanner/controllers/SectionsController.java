@@ -8,7 +8,7 @@ import ru.webplanner.dao.SectionDAO;
 import ru.webplanner.models.Section;
 
 @Controller
-@RequestMapping("/sections")
+@RequestMapping
 public class SectionsController {
 
     private final SectionDAO sectionDAO;
@@ -18,44 +18,32 @@ public class SectionsController {
         this.sectionDAO = sectionDAO;
     }
 
-    @GetMapping
-    public String index(Model model) {
-        model.addAttribute("sections", sectionDAO.index());
-        return "sections/index";
-    }
-
-    @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("section", sectionDAO.show(id));
-        return "sections/show";
-    }
-
-    @GetMapping("/new")
+    @GetMapping("/sections/new")
     public String newSection(@ModelAttribute("section") Section section) {
         return "sections/new";
     }
 
-    @PostMapping
+    @PostMapping("/sections")
     public String saveSection(@ModelAttribute("section") Section section) {
         sectionDAO.save(section);
-        return "redirect:/sections";
+        return "redirect:/" + sectionDAO.getOwner();
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/sections/{id}/edit")
     public String editSection(@ModelAttribute("id") int id, Model model) {
         model.addAttribute(sectionDAO.show(id));
         return "sections/edit";
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/sections/{id}")
     public String update(@ModelAttribute("section") Section section, @PathVariable("id") int id) {
         sectionDAO.update(id, section);
-        return "redirect:/sections";
+        return "redirect:/" + sectionDAO.getOwner();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/sections/{id}")
     public String deleteSection(@PathVariable("id") int id) {
         sectionDAO.delete(id);
-        return "redirect:/sections";
+        return "redirect:/" + sectionDAO.getOwner();
     }
 }

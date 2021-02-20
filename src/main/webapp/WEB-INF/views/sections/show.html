@@ -2,24 +2,28 @@
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${section.getName()}">TITLE</title>
+    <title>Section</title>
 </head>
 <body>
 
-<p th:text="${section.getName()}">NAME</p>
-<p th:text="${section.getId()}">ID</p>
-<p th:text="${section.getAccountId()}">PERSON_ID</p>
+<div th:fragment="show (section)">
+
+    <p th:text="${section.getName()}">NAME</p>
+    <p th:text="${section.getId()}">ID</p>
+    <p th:text="${section.getOwnerAccount()}">PERSON_ID</p>
 
 
-<form th:action="@{/sections/{id}/edit (id=${section.getId()})}" th:object="${section}">
-    <input type="submit" value="Edit">
-</form>
+    <form th:action="@{/sections/{id}/edit (id=${section.getId()})}" th:object="${section}">
+        <input type="submit" value="Edit">
+    </form>
 
-<br/><br/><br/><hr/>
+    <br/><br/><br/><hr/>
 
-<form th:method="DELETE" th:action="@{/sections/{id} (id=${section.getId()})}">
-    <input type="submit" value="Delete">
-</form>
+    <form th:method="DELETE" th:action="@{/sections/{id} (id=${section.getId()})}">
+        <input type="submit" value="Delete">
+    </form>
+
+</div>
 
 </body>
 </html>

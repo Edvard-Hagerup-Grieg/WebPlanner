@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New account</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/{userName} (userName=${account.getUserName()})}" th:object="${account}">
+    <label for="userName">Username</label>
+    <input type="text" th:field="*{userName}" id="userName"/>
+    <br/>
+    <input type="submit" value="Create">
+</form>
+
+</body>
+</html>

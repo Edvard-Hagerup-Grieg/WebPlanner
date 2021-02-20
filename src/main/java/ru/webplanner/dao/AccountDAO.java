@@ -5,7 +5,10 @@ import ru.webplanner.models.Account;
 public interface AccountDAO {
 
     Account show(String userName);
-    boolean contains(Account account);
-    void add(Account account);
+    void save(Account account);
+    void update(String userName, Account account);
     void delete(String userName);
+
+    boolean contains(Account account);
+
 }

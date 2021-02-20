@@ -7,8 +7,10 @@ import java.util.List;
 public interface SectionDAO {
 
     List<Section> index();
-    Section show(int id);
+    Section show(Integer id);
     void save(Section section);
     void update(int id, Section section);
     void delete(int id);
+
+    String getOwner();
 }

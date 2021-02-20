@@ -1,17 +1,32 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${account.getUserName()}">Username</title>
+    <title th:text="${account.getUserName()}">Title</title>
 </head>
 <body>
 
-<p th:text="${account.getUserName()}">Username</p>
+<div style="float: left; width: 10%; height: 850px; background: #cadaba; padding: 20px">
 
-<br/><hr/>
-<form th:method="DELETE" th:action="@{/{userName} (userName=${account.getUserName()})}">
-    <input type="submit" value="Delete">
-</form>
+  <a th:href="@{/{userName}/settings (userName=${account.getUserName()})}"
+     th:text="${account.getUserName()}"></a>
+
+  <div th:if="sections != null"
+       th:insert="~{sections/index :: index (${sections}, ${account.getUserName()})}">
+  </div>
+
+
+  <br/>
+  <form th:action="@{/sections/new}">
+    <input type="submit" value="Create">
+  </form>
+
+</div>
+
+<div th:if="sectionView != null"
+     th:insert="~{sections/show :: show(${sectionView})}"
+     style="float: left; width: 85%; height: 850px; background: #f5f5dc; padding: 20px">
+</div>
 
 </body>
 </html>
