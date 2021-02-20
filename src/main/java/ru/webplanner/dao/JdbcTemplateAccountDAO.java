@@ -31,4 +31,16 @@ public class JdbcTemplateAccountDAO implements AccountDAO {
     public boolean contains(Account account) {
         return show(account.getUserName()) != null;
     }
+
+    @Override
+    public void add(Account account) {
+        jdbcTemplate.update("INSERT INTO Account VALUES (default,?,?)",
+                account.getUserName(), "password");
+    }
+
+    @Override
+    public void delete(String userName) {
+        jdbcTemplate.update("DELETE FROM Account WHERE userName=?",
+                userName);
+    }
 }

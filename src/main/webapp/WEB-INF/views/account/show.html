@@ -5,6 +5,13 @@
     <title th:text="${account.getUserName()}">Username</title>
 </head>
 <body>
+
 <p th:text="${account.getUserName()}">Username</p>
+
+<br/><hr/>
+<form th:method="DELETE" th:action="@{/{userName} (userName=${account.getUserName()})}">
+    <input type="submit" value="Delete">
+</form>
+
 </body>
 </html>
