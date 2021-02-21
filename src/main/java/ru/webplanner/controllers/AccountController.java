@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.webplanner.dao.AccountDAO;
+import ru.webplanner.dao.ModuleDAO;
 import ru.webplanner.dao.SectionDAO;
 import ru.webplanner.models.Account;
 
@@ -13,11 +14,15 @@ public class AccountController {
 
     private final AccountDAO accountDAO;
     private final SectionDAO sectionDAO;
+    private final ModuleDAO moduleDAO;
 
     @Autowired
-    public AccountController(AccountDAO accountDAO, SectionDAO sectionDAO) {
+    public AccountController(AccountDAO accountDAO,
+                             SectionDAO sectionDAO,
+                             ModuleDAO moduleDAO) {
         this.accountDAO = accountDAO;
         this.sectionDAO = sectionDAO;
+        this.moduleDAO = moduleDAO;
     }
 
     @GetMapping("/{userName}")
@@ -27,6 +32,7 @@ public class AccountController {
         model.addAttribute("account", accountDAO.show(userName));
         model.addAttribute("sections", sectionDAO.index());
         model.addAttribute("sectionView", sectionDAO.show(sectionId));
+        model.addAttribute("modulesView", moduleDAO.index(sectionId));
         return "account/show";
     }
 

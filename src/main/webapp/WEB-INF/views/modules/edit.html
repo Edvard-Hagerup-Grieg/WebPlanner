@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:object="${module}"
+      th:action="@{/sections/{sectionId}/modules/{id} (sectionId=${sectionId}, id=${module.getId()})}">
+    <label for="name">Name</label>
+    <input type="text" th:field="*{name}" id="name"><br/>
+    <input type="submit" value="Edit">
+</form>
+
+</body>
+</html>

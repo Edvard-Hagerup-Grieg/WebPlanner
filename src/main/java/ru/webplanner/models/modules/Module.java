@@ -4,6 +4,15 @@ public class Module {
     protected ModuleType type;
     protected int id;
     protected int sectionId;
+    protected String name;
+
+    public Module() {
+    }
+
+    public Module(ModuleType type, String name) {
+        this.type = type;
+        this.name = name;
+    }
 
     public Module(ModuleType type) {
         this.type = type;
@@ -31,5 +40,13 @@ public class Module {
 
     public void setSectionId(int sectionId) {
         this.sectionId = sectionId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

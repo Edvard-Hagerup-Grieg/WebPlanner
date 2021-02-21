@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Module</title>
+</head>
+<body>
+
+<form th:method="POST" th:object="${module}"
+      th:action="@{/sections/{sectionId}/modules (sectionId=${sectionId})}">
+    <label for="name">Name</label>
+    <input type="text" th:field="*{name}" id="name"><br/>
+    <input type="submit" value="Create">
+</form>
+
+</body>
+</html>

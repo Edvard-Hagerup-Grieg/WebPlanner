@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<div th:fragment="show (section)">
+<div th:fragment="show (section, modulesView)">
 
     <p th:text="${section.getName()}">NAME</p>
     <p th:text="${section.getId()}">ID</p>
@@ -16,6 +16,9 @@
     <form th:action="@{/sections/{id}/edit (id=${section.getId()})}" th:object="${section}">
         <input type="submit" value="Edit">
     </form>
+
+    <div th:if="modulesView != null" th:insert="~{modules/fragments/index :: index (${modulesView})}">
+    </div>
 
     <br/><br/><br/><hr/>
 

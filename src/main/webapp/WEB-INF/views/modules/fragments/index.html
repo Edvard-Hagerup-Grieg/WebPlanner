@@ -6,8 +6,13 @@
 </head>
 <body>
 
-<div th:each="module : ${modules}" th:insert="~{fragments/test.html :: frag(${module})}"
-     style="position: absolute; left: 0; top: 0">
+<div th:fragment="index (modules)">
+
+    <br/><br/><br/>
+    <div th:each="module : ${modules}">
+        <p th:text="${module.getName()}">NAME</p>
+    </div>
+
 </div>
 
 </body>
