@@ -24,8 +24,40 @@
 </div>
 
 <div th:if="sectionView != null"
-     th:insert="~{sections/fragments/show :: show(${sectionView}, ${modulesView})}"
      style="float: left; width: 85%; height: 850px; background: #f5f5dc; padding: 20px">
+
+    <p th:text="${sectionView.getName()}">NAME</p>
+
+    <div th:each="module : ${modules}">
+        <a th:href="@{/{userName} (userName=${account.getUserName()},
+        tab=${sectionView.getId()}, module=${module.getId()})}"
+            th:text="${module.getName()}">
+            MODULE
+        </a>
+    </div>
+
+
+    <div th:if="moduleView != null">
+        <hr/>
+        <div th:each="note : ${notes}">
+            <p th:text="${note.getDayNumber() + 1} + ': ' + ${note.getText()}"></p>
+        </div>
+
+        <br/>
+        <a th:href="@{/{userName}/new (userName=${account.getUserName()},
+        tab=${sectionView.getId()}, module=${moduleView.getId()})}"
+           th:text="Add note">
+            NEW
+        </a>
+    </div>
+
+
+
+
+    <br/><br/><br/><hr/>
+    <form th:method="DELETE" th:action="@{/sections/{id} (id=${section.getId()})}">
+        <input type="submit" value="Delete">
+    </form>
 </div>
 
 </body>

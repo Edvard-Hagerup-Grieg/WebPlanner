@@ -10,7 +10,10 @@
 
     <br/><br/><br/>
     <div th:each="module : ${modules}">
-        <p th:text="${module.getName()}">NAME</p>
+
+        <div th:insert="~{modules/fragments/show :: show (${module}, ${notes})}">
+
+        </div>
     </div>
 
 </div>

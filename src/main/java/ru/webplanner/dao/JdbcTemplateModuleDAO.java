@@ -28,12 +28,12 @@ public class JdbcTemplateModuleDAO implements ModuleDAO {
     }
 
     @Override
-    public Module show(int id) {
-        return jdbcTemplate.query("SELECT * FROM Module WHERE id=?",
+    public Module show(Integer id) {
+        return id != null ? jdbcTemplate.query("SELECT * FROM Module WHERE id=?",
                 new Object[] {id},
                 new int[] {Types.INTEGER},
                 new BeanPropertyRowMapper<>(Module.class))
-                .stream().findAny().orElse(null);
+                .stream().findAny().orElse(null) : null;
     }
 
     @Override

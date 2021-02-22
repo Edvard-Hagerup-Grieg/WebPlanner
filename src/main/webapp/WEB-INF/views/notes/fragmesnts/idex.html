@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes</title>
+</head>
+<body>
+
+
+<div th:fragment="index (notes)">
+    <div th:each="note : ${notes}">
+        <p th:text="${note.getText()}">note</p>
+    </div>
+</div>
+
+</body>
+</html>

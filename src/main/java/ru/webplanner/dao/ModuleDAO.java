@@ -7,7 +7,7 @@ import java.util.List;
 public interface ModuleDAO {
 
     List<Module> index(Integer sectionId);
-    Module show(int id);
+    Module show(Integer id);
     void save(int sectionId, Module module);
     void update(int id, Module module);
     void delete(int id);

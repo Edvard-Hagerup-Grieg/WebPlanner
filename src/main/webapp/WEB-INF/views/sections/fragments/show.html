@@ -6,18 +6,15 @@
 </head>
 <body>
 
-<div th:fragment="show (section, modulesView)">
+<div th:fragment="show (section, modulesView, notesView)">
 
     <p th:text="${section.getName()}">NAME</p>
-    <p th:text="${section.getId()}">ID</p>
-    <p th:text="${section.getOwnerAccount()}">PERSON_ID</p>
 
+    <div th:each="module : ${modulesView}">
+        <a th:href="@{/}"></a>
+    </div>
 
-    <form th:action="@{/sections/{id}/edit (id=${section.getId()})}" th:object="${section}">
-        <input type="submit" value="Edit">
-    </form>
-
-    <div th:if="modulesView != null" th:insert="~{modules/fragments/index :: index (${modulesView})}">
+    <div th:if="modulesView != null" th:insert="~{modules/fragments/index :: index (${modulesView}, ${notesView})}">
     </div>
 
     <br/><br/><br/><hr/>

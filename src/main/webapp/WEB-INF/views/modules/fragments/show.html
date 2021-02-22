@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Module</title>
 </head>
 <body>
+
+<div th:fragment="show (module, notesView)">
+
+    <p th:text="${module.getName()}">NAME</p>
+
+    <div th:if="${module.getType()} == 'LIST'" th:insert="~{notes/fragments/index :: index(${notesView})}">
+    </div>
+
+</div>
 
 </body>
 </html>
