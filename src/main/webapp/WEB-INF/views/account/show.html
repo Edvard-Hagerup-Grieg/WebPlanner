@@ -47,9 +47,31 @@
         <p th:text="${moduleView.getName()}">NAME</p>
 
         <div th:each="note : ${notes}">
-            <p th:text="${note.getDayNumber()} + ': ' + ${note.getText()}">NOTE</p>
+            <div>
+                <p th:text="${note.getDayNumber()} + ': ' + ${note.getText()}" th:id="note">NOTE</p>
+
+                <form th:for="note"
+                      th:object="${note}"
+                      th:action="@{/sections/{sectionId}/modules/{moduleId}/notes/{id}/edit
+                      (sectionId=${sectionView.getId()},
+                      moduleId=${moduleView.getId()},
+                      id=${note.getId()})}">
+                    <input type="submit" value="Edit">
+                </form>
+
+                <form th:for="note"
+                      th:method="DELETE"
+                      th:object="${note}"
+                      th:action="@{/sections/{sectionId}/modules/{moduleId}/notes/{id}
+                      (sectionId=${sectionView.getId()},
+                      moduleId=${moduleView.getId()},
+                      id=${note.getId()})}">
+                    <input type="submit" value="Delete">
+                </form>
+            </div>
         </div>
 
+        <br/>
         <form th:action="@{/sections/{sectionId}/modules/{moduleId}/notes/new
         (sectionId=${sectionView.getId()}, moduleId=${moduleView.getId()})}">
             <input type="submit" value="Add note">
