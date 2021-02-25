@@ -24,7 +24,7 @@
 </div>
 
 <div th:if="sectionView != null"
-     style="float: left; width: 85%; height: 850px; background: #f5f5dc; padding: 20px">
+     style="float: left; width: 80%; height: 850px; background: #f5f5dc; padding: 20px">
 
     <p th:text="${sectionView.getName()}">NAME</p>
 
@@ -37,25 +37,28 @@
     </div>
 
 
+    <br/>
+    <form th:action="@{/sections/{sectionId}/modules/new (sectionId=${sectionView.getId()})}">
+        <input type="submit" value="Add module">
+    </form>
+
+    <hr/>
     <div th:if="moduleView != null">
-        <hr/>
+        <p th:text="${moduleView.getName()}">NAME</p>
+
         <div th:each="note : ${notes}">
-            <p th:text="${note.getDayNumber() + 1} + ': ' + ${note.getText()}"></p>
+            <p th:text="${note.getDayNumber()} + ': ' + ${note.getText()}">NOTE</p>
         </div>
 
-        <br/>
-        <a th:href="@{/{userName}/new (userName=${account.getUserName()},
-        tab=${sectionView.getId()}, module=${moduleView.getId()})}"
-           th:text="Add note">
-            NEW
-        </a>
+        <form th:action="@{/sections/{sectionId}/modules/{moduleId}/notes/new
+        (sectionId=${sectionView.getId()}, moduleId=${moduleView.getId()})}">
+            <input type="submit" value="Add note">
+        </form>
     </div>
 
 
-
-
     <br/><br/><br/><hr/>
-    <form th:method="DELETE" th:action="@{/sections/{id} (id=${section.getId()})}">
+    <form th:method="DELETE" th:action="@{/sections/{id} (id=${sectionView.getId()})}">
         <input type="submit" value="Delete">
     </form>
 </div>
