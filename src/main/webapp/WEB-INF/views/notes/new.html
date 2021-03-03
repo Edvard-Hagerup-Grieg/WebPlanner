@@ -6,11 +6,7 @@
 </head>
 <body>
 
-That's OK. I'm here.
-
-<form th:method="POST"
-      th:object="${note}"
-      th:action="@{/sections/{sectionId}/modules/{moduleId}/notes (sectionId=${sectionId}, moduleId=${moduleId})}">
+<form th:method="POST" th:action="@{url}" th:object="${note}">
     <label for="dayNumber">Date Number</label>
     <input type="dayNumber" th:field="*{dayNumber}" id="dayNumber"><br/>
     <label for="text">Text</label>
