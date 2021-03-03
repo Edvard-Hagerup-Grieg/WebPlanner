@@ -31,7 +31,6 @@ public class ConfigClass implements WebMvcConfigurer {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver springResourceTemplateResolver = new SpringResourceTemplateResolver();
         springResourceTemplateResolver.setApplicationContext(applicationContext);
-        springResourceTemplateResolver.setCharacterEncoding("UTF-8");
         springResourceTemplateResolver.setPrefix("/WEB-INF/views/");
         springResourceTemplateResolver.setSuffix(".html");
         return springResourceTemplateResolver;
@@ -49,7 +48,6 @@ public class ConfigClass implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
         thymeleafViewResolver.setTemplateEngine(templateEngine());
-        thymeleafViewResolver.setCharacterEncoding("UTF-8");
         thymeleafViewResolver.setOrder(1);
         registry.viewResolver(thymeleafViewResolver);
     }
@@ -59,9 +57,9 @@ public class ConfigClass implements WebMvcConfigurer {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/webplanner");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("6666");
+        dataSource.setUrl("xxx");
+        dataSource.setUsername("xxx");
+        dataSource.setPassword("xxx");
 
         return dataSource;
     }
