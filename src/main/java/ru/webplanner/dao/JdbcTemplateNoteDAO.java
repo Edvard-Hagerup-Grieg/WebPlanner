@@ -21,7 +21,7 @@ public class JdbcTemplateNoteDAO implements NoteDAO {
 
     @Override
     public List<Note> index(Integer moduleId) {
-        return moduleId != null ? jdbcTemplate.query("SELECT * FROM Note WHERE moduleId=? ORDER BY dayNumber",
+        return moduleId != null ? jdbcTemplate.query("SELECT * FROM Note WHERE moduleId=?",
                 new Object[] {moduleId},
                 new int[] {Types.INTEGER},
                 new BeanPropertyRowMapper<>(Note.class)) : null;
@@ -35,7 +35,7 @@ public class JdbcTemplateNoteDAO implements NoteDAO {
 
     @Override
     public void update(int id, Note note) {
-        jdbcTemplate.update("UPDATE Note SET dayNumber=?, text=? WHERE id=?",
+        jdbcTemplate.update("UPDATE Note SET date=?, text=? WHERE id=?",
                 note.getDayNumber(), note.getText(), id);
     }
 

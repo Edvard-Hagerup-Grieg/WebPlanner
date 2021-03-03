@@ -1,20 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
-<form th:method="PATCH" th:object="${note}"
-      th:action="@{/sections/{sectionId}/modules/{moduleId}/notes/{id}
-      (sectionId=${sectionId}, moduleId=${moduleId}, id=${note.getId()})}">
-    <label for="dayNumber">Date Number</label>
-    <input type="text" th:field="*{dayNumber}" id="dayNumber"><br/>
-    <label for="text">Text</label>
-    <input type="text" th:field="*{text}" id="text"><br/>
-    <input type="submit" value="Edit">
-</form>
 
 </body>
 </html>
