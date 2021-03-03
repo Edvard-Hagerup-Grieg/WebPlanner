@@ -1,13 +1,9 @@
 package ru.webplanner.models;
 
-import java.sql.Types;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 public class Note {
     private int id;
     private int sectionId;
-    private GregorianCalendar date;
+    private int dayNumber;
     private String text;
 
     public int getId() {
@@ -26,12 +22,12 @@ public class Note {
         this.sectionId = monthId;
     }
 
-    public GregorianCalendar getDayNumber() {
-        return date;
+    public int getDayNumber() {
+        return dayNumber;
     }
 
-    public void setDayNumber(GregorianCalendar dayNumber) {
-        this.date = dayNumber;
+    public void setDayNumber(int dayNumber) {
+        this.dayNumber = dayNumber;
     }
 
     public String getText() {

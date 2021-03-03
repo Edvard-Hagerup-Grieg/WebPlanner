@@ -5,52 +5,63 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.webplanner.dao.NoteDAO;
+import ru.webplanner.dao.SectionDAO;
 import ru.webplanner.models.Note;
 
 @Controller
-@RequestMapping("/{userName}?tab={sectionId}&module={moduleId}")
+@RequestMapping("/sections/{sectionId}/modules/{moduleId}/notes")
 public class NotesController {
 
+    private final SectionDAO sectionDAO;
     private final NoteDAO noteDAO;
 
     @Autowired
-    public NotesController(NoteDAO noteDAO) {
+    public NotesController(SectionDAO sectionDAO, NoteDAO noteDAO) {
         this.noteDAO = noteDAO;
+        this.sectionDAO = sectionDAO;
     }
 
     @GetMapping("/new")
-    public String newNote(@PathVariable("userName") int userName,
-                          @PathVariable("sectionId") int sectionId,
+    public String newNote(@PathVariable("sectionId") int sectionId,
                           @PathVariable("moduleId") int moduleId,
                           Note note, Model model) {
+        model.addAttribute("sectionId", sectionId);
+        model.addAttribute("moduleId", moduleId);
         model.addAttribute("note", note);
-        model.addAttribute("url", "/{"+userName+"}?tab={"+sectionId+"}&module={"+moduleId+"}");
         return "notes/new";
 
     }
 
     @PostMapping
     public String saveNote(@ModelAttribute("note") Note note,
-                           @PathVariable("moduleId") int moduleId) {
+                           @PathVariable("moduleId") int moduleId,
+                           @PathVariable("sectionId") int sectionId) {
         noteDAO.save(moduleId, note);
-        return "redirect:";
+        String request = sectionDAO.getOwner() + "?tab=" + sectionId + "&module=" + moduleId;
+        return "redirect:/" + request;
     }
 
-    @GetMapping("/edit")
+    @GetMapping("/{id}/edit")
     public String editNote(@ModelAttribute("note") Note note) {
         return "notes/edit";
     }
 
-    @PatchMapping("/notes/{id}")
+    @PatchMapping("/{id}")
     public String updateNote(@ModelAttribute("note") Note note,
-                             @PathVariable("id") int id) {
+                             @PathVariable("id") int id,
+                             @PathVariable("sectionId") int sectionId,
+                             @PathVariable("moduleId") int moduleId) {
         noteDAO.update(id, note);
-        return "redirect:";
+        String request = sectionDAO.getOwner() + "?tab=" + sectionId + "&module=" + moduleId;
+        return "redirect:/" + request;
     }
 
-    @DeleteMapping("/notes/{id}")
-    public String deleteNote(@PathVariable("id") int id) {
+    @DeleteMapping("/{id}")
+    public String deleteNote(@PathVariable("id") int id,
+                             @PathVariable("sectionId") int sectionId,
+                             @PathVariable("moduleId") int moduleId) {
         noteDAO.delete(id);
-        return "redirect:";
+        String request = sectionDAO.getOwner() + "?tab=" + sectionId + "&module=" + moduleId;
+        return "redirect:/" + request;
     }
 }

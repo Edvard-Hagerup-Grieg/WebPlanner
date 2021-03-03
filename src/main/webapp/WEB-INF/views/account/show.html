@@ -8,54 +8,79 @@
 
 <div style="float: left; width: 10%; height: 850px; background: #cadaba; padding: 20px">
 
-  <a th:href="@{/{userName}/settings (userName=${account.getUserName()})}"
-     th:text="${account.getUserName()}"></a>
+    <a th:href="@{/{userName}/settings (userName=${account.getUserName()})}"
+       th:text="${account.getUserName()}"></a>
 
-  <div th:if="sections != null"
-       th:insert="~{sections/fragments/index :: index (${sections}, ${account.getUserName()})}">
-  </div>
+    <div th:if="sections != null"
+         th:insert="~{sections/fragments/index :: index (${sections}, ${account.getUserName()})}">
+    </div>
 
 
-  <br/>
-  <form th:action="@{/sections/new}">
-    <input type="submit" value="Create">
-  </form>
+    <br/>
+    <form th:action="@{/sections/new}">
+        <input type="submit" value="Create">
+    </form>
 
 </div>
 
 <div th:if="sectionView != null"
-     style="float: left; width: 85%; height: 850px; background: #f5f5dc; padding: 20px">
+     style="float: left; width: 80%; height: 850px; background: #f5f5dc; padding: 20px">
 
     <p th:text="${sectionView.getName()}">NAME</p>
 
     <div th:each="module : ${modules}">
         <a th:href="@{/{userName} (userName=${account.getUserName()},
         tab=${sectionView.getId()}, module=${module.getId()})}"
-            th:text="${module.getName()}">
+           th:text="${module.getName()}">
             MODULE
         </a>
     </div>
 
 
+    <br/>
+    <form th:action="@{/sections/{sectionId}/modules/new (sectionId=${sectionView.getId()})}">
+        <input type="submit" value="Add module">
+    </form>
+
+    <hr/>
     <div th:if="moduleView != null">
-        <hr/>
+        <p th:text="${moduleView.getName()}">NAME</p>
+
         <div th:each="note : ${notes}">
-            <p th:text="${note.getDayNumber() + 1} + ': ' + ${note.getText()}"></p>
+            <div>
+                <p th:text="${note.getDayNumber()} + ': ' + ${note.getText()}" th:id="note">NOTE</p>
+
+                <form th:for="note"
+                      th:object="${note}"
+                      th:action="@{/sections/{sectionId}/modules/{moduleId}/notes/{id}/edit
+                      (sectionId=${sectionView.getId()},
+                      moduleId=${moduleView.getId()},
+                      id=${note.getId()})}">
+                    <input type="submit" value="Edit">
+                </form>
+
+                <form th:for="note"
+                      th:method="DELETE"
+                      th:object="${note}"
+                      th:action="@{/sections/{sectionId}/modules/{moduleId}/notes/{id}
+                      (sectionId=${sectionView.getId()},
+                      moduleId=${moduleView.getId()},
+                      id=${note.getId()})}">
+                    <input type="submit" value="Delete">
+                </form>
+            </div>
         </div>
 
         <br/>
-        <a th:href="@{/{userName}/new (userName=${account.getUserName()},
-        tab=${sectionView.getId()}, module=${moduleView.getId()})}"
-           th:text="Add note">
-            NEW
-        </a>
+        <form th:action="@{/sections/{sectionId}/modules/{moduleId}/notes/new
+        (sectionId=${sectionView.getId()}, moduleId=${moduleView.getId()})}">
+            <input type="submit" value="Add note">
+        </form>
     </div>
 
 
-
-
     <br/><br/><br/><hr/>
-    <form th:method="DELETE" th:action="@{/sections/{id} (id=${section.getId()})}">
+    <form th:method="DELETE" th:action="@{/sections/{id} (id=${sectionView.getId()})}">
         <input type="submit" value="Delete">
     </form>
 </div>
