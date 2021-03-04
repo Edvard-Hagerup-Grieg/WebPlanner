@@ -38,51 +38,76 @@
 
 
     <br/>
-    <form th:action="@{/sections/{sectionId}/modules/new (sectionId=${sectionView.getId()})}">
-        <input type="submit" value="Add module">
-    </form>
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <form th:action="@{/sections/{sectionId}/modules/new (sectionId=${sectionView.getId()})}">
+                    <input type="submit" value="Add module">
+                </form>
+            </td>
+
+            <td>
+                <form th:action="@{/sections/{id}/edit (id=${sectionView.getId()})}" style="float: left">
+                    <input type="submit" value="Edit">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
     <hr/>
     <div th:if="moduleView != null">
         <p th:text="${moduleView.getName()}">NAME</p>
 
-        <div th:each="note : ${notes}">
-            <div>
-                <p th:text="${note.getDayNumber()} + ': ' + ${note.getText()}" th:id="note">NOTE</p>
+        <table>
+            <tbody>
+            <tr th:each="note : *{notes}">
+                <td>
+                    <p th:text="${note.getDayNumber()} + ': ' + ${note.getText()}" th:id="note">
+                        NOTE
+                    </p>
+                </td>
 
-                <form th:for="note"
-                      th:object="${note}"
-                      th:action="@{/sections/{sectionId}/modules/{moduleId}/notes/{id}/edit
+                <td>
+                    <form th:for="note"
+                          th:object="${note}"
+                          th:action="@{/sections/{sectionId}/modules/{moduleId}/notes/{id}/edit
                       (sectionId=${sectionView.getId()},
                       moduleId=${moduleView.getId()},
                       id=${note.getId()})}">
-                    <input type="submit" value="Edit">
-                </form>
+                        <input type="submit" value="Edit">
+                    </form>
+                </td>
 
-                <form th:for="note"
-                      th:method="DELETE"
-                      th:object="${note}"
-                      th:action="@{/sections/{sectionId}/modules/{moduleId}/notes/{id}
+                <td>
+                    <form th:for="note"
+                          th:method="DELETE"
+                          th:object="${note}"
+                          th:action="@{/sections/{sectionId}/modules/{moduleId}/notes/{id}
                       (sectionId=${sectionView.getId()},
                       moduleId=${moduleView.getId()},
                       id=${note.getId()})}">
-                    <input type="submit" value="Delete">
-                </form>
-            </div>
-        </div>
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
         <br/>
         <form th:action="@{/sections/{sectionId}/modules/{moduleId}/notes/new
         (sectionId=${sectionView.getId()}, moduleId=${moduleView.getId()})}">
             <input type="submit" value="Add note">
         </form>
+
+        <br/><hr/>
+        <form th:method="DELETE" th:action="@{/sections/{sectionId}/modules/{id}
+        (sectionId=${sectionView.getId()}, id=${moduleView.getId()})}">
+            <input type="submit" value="Delete">
+        </form>
     </div>
 
-
-    <br/><br/><br/><hr/>
-    <form th:method="DELETE" th:action="@{/sections/{id} (id=${sectionView.getId()})}">
-        <input type="submit" value="Delete">
-    </form>
 </div>
 
 </body>

@@ -12,5 +12,10 @@
     <input type="submit" value="Edit">
 </form>
 
+<br/><hr/>
+<form th:method="DELETE" th:action="@{/sections/{id} (id=${section.getId()})}">
+    <input type="submit" value="Delete">
+</form>
+
 </body>
 </html>
