@@ -1,27 +1,60 @@
 package ru.webplanner.models;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-@Component
-public class Account {
+import java.util.Collection;
 
-    private String userName;
+@Component
+public class Account implements UserDetails {
+
+    private String username;
     private String password;
 
     public Account() {
     }
 
-    public Account(String userName, String password) {
-        this.userName = userName;
+    public Account(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
-    public String getUserName() {
-        return userName;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
+    public void setUserName(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

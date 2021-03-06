@@ -8,7 +8,7 @@
 
 <form method="POST" th:action="@{/login}" th:object="${account}">
     <label for="userName">Username</label>
-    <input type="text" th:field="*{userName}" id="userName">
+    <input type="text" th:field="*{username}" id="userName">
     <br/>
     <input type="submit" value="Log In">
 </form>

@@ -29,6 +29,11 @@ public class AccountController {
         this.noteDAO = noteDAO;
     }
 
+    @GetMapping("/login")
+    public String login(@ModelAttribute("account") Account account) {
+        return "login/login";
+    }
+
     @GetMapping("/{userName}")
     public String show(@PathVariable("userName") String userName,
                        @RequestParam(value = "tab", required = false) Integer sectionId,
@@ -73,6 +78,6 @@ public class AccountController {
                                 Model model) {
         accountDAO.delete(userName);
         sectionDAO.delete();
-        return "redirect:/login";
+        return "login/login";
     }
 }

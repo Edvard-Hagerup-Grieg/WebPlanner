@@ -3,9 +3,9 @@ package ru.webplanner.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import ru.webplanner.models.Section;
-import ru.webplanner.models.SessionFacade;
 
 import java.sql.Types;
 import java.util.List;
@@ -14,12 +14,12 @@ import java.util.List;
 public class JdbcTemplateSectionDAO implements SectionDAO {
 
     private final JdbcTemplate jdbcTemplate;
-    private final SessionFacade sessionFacade;
+    private final UserDetails user;
 
     @Autowired
-    public JdbcTemplateSectionDAO(JdbcTemplate jdbcTemplate, SessionFacade sessionFacade) {
+    public JdbcTemplateSectionDAO(JdbcTemplate jdbcTemplate, UserDetails user) {
         this.jdbcTemplate = jdbcTemplate;
-        this.sessionFacade = sessionFacade;
+        this.user = user;
     }
 
     @Override
@@ -65,6 +65,6 @@ public class JdbcTemplateSectionDAO implements SectionDAO {
 
     @Override
     public String getOwner() {
-        return sessionFacade.getAccount().getUserName();
+        return user.getUsername();
     }
 }
